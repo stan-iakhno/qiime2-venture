@@ -2,3 +2,8 @@
 readlink -f *_1_1* > fwlist.csv
 readlink -f *_1_2* > rvlist.csv
 #copy and paste the absolute paths to the "manifest" file
+#place the manifest txt (without extension) to the working directory
+qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' 
+--input-path mani # the text manifest file
+--output-path manifesta.qza 
+--input-format PairedEndFastqManifestPhred33
