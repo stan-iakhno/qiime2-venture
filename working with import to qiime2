@@ -1,0 +1,4 @@
+# When all fastq.gz are in the working folder generate 2 csv-file lists for forward and reverse
+readlink -f *_1_1* > fwlist.csv
+readlink -f *_1_2* > rvlist.csv
+#copy and paste the absolute paths to the "manifest" file
