@@ -7,3 +7,9 @@ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]'
 --input-path mani # the text manifest file
 --output-path manifesta.qza 
 --input-format PairedEndFastqManifestPhred33
+
+#run descriptive on already demultiplexed seqs
+qiime demux summarize   
+--i-data manifest.qza   
+--o-visualization demux.qzv
+
