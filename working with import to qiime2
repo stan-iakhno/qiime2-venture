@@ -8,6 +8,9 @@ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]'
 --output-path manifesta.qza 
 --input-format PairedEndFastqManifestPhred33
 
+#alternatively for single-end strategy I run the following, which is supplied with the manifest file pointing at the forward reads only
+qiime tools import --type 'SampleData[SequencesWithQuality]'  --input-path mani2 --output-path manifest_single_f.qza  --input-format SingleEndFastqManifestPhred33
+
 #run descriptive on already demultiplexed seqs
 qiime demux summarize   
 --i-data manifest.qza   
