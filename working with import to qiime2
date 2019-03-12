@@ -16,7 +16,7 @@ qiime demux summarize
 --i-data manifest.qza   
 --o-visualization demux.qzv
 
-#run DADA2 denoising on the SINGLE forward read seqs first
+#run DADA2 denoising on the SINGLE forward read seqs first, for PAIRED see WIKI(batch mode)
 qiime dada2 denoise-single \
   --i-demultiplexed-seqs manifest_single_f.qza\
   --p-trim-left 20 \
