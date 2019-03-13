@@ -24,3 +24,11 @@ qiime dada2 denoise-single \
   --o-representative-sequences rep-seqs-singleR-dada2.qza \
   --o-table table-singleR-dada2.qza \
   --o-denoising-stats stats-singleR-dada2.qza
+#produce summaries after the filtering/denoising
+  qiime feature-table summarize \
+  --i-table table-singleR-dada2.qza \
+  --o-visualization table-singleR-dada2.qzv \
+  --m-sample-metadata-file metadata_col_7.tsv
+qiime feature-table tabulate-seqs \
+  --i-data rep-seqs-singleR-dada2.qza \
+  --o-visualization rep-seqs-singleR-dada2.qzv
