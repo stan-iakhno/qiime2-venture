@@ -48,3 +48,10 @@ qiime feature-table tabulate-seqs \
   --p-sampling-depth 492527 \
   --m-metadata-file metadata_col_7.tsv \
   --output-dir core-metrics-results
+# Rarefaction curve
+qiime diversity alpha-rarefaction \
+  --i-table table-singleR-dada2.qza \
+  --i-phylogeny rooted-tree-singleR-dada2.qza \
+  --p-max-depth 492527 \
+  --m-metadata-file metadata_col_7.tsv \
+  --o-visualization alpha-rarefaction-dada2Single.qzv
