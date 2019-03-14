@@ -32,3 +32,12 @@ qiime dada2 denoise-single \
 qiime feature-table tabulate-seqs \
   --i-data rep-seqs-singleR-dada2.qza \
   --o-visualization rep-seqs-singleR-dada2.qzv
+  
+ #phylogeny reconstruction
+   qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs-singleR-dada2.qza \
+  --o-alignment aligned-singleR-dada2-rep-seqs.qza \
+  --o-masked-alignment masked-aligned-rsingleR-dada2-rep-seqs.qza \
+  --o-tree unrooted-singleR-dada2-tree.qza \
+  --o-rooted-tree rooted-tree-singleR-dada2.qza
+  --p-n-threads 16
