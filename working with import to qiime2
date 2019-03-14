@@ -70,9 +70,15 @@ qiime metadata tabulate \
   --i-taxonomy taxonomy-dada2-single.qza \
   --m-metadata-file metadata_col_7.tsv \
   --o-visualization taxa-bar-dada-single-plots.qzv
+#rectify the two groups for compraison
+qiime feature-table filter-samples \
+  --i-table table-singleR-dada2.qza \
+  --m-metadata-file metadata_col_7.tsv \
+  --p-where "BodySite='colon'" \
+  --o-filtered-table table-filtered-singleR-dada2.qza
 
   qiime composition add-pseudocount \
-  --i-table table-singleR-dada2.qza \ # assumes there are two groups for comparison, otherwise rectify according to manual
+  --i-table table-filtered-singleR-dada2.qza \
   --o-composition-table comp-gut-singleR-dada2table.qza
 
   qiime composition ancom \
