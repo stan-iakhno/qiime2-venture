@@ -82,7 +82,7 @@ qiime feature-table filter-samples \
   --o-composition-table comp-gut-singleR-dada2table.qza
 
   qiime composition ancom \
-  --i-table table-singleR-dada2.qza \
+  --i-table comp-gut-singleR-dada2table.qza \
   --m-metadata-file metadata_col_7.tsv \
   --m-metadata-column Diett \
   --o-visualization ancom-Diett-dada2-single.qzv
