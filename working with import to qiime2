@@ -55,3 +55,29 @@ qiime diversity alpha-rarefaction \
   --p-max-depth 492527 \
   --m-metadata-file metadata_col_7.tsv \
   --o-visualization alpha-rarefaction-dada2Single.qzv
+  #taxonomy assignment after have downloaded a trained classifier
+  qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-nb-classifier.qza \
+  --i-reads rep-seqs-singleR-dada2.qza \
+  --o-classification taxonomy-dada2-single.qza
+
+qiime metadata tabulate \
+  --m-input-file taxonomy-dada2-single.qza \
+  --o-visualization taxonomy-dada2-single.qzv
+
+  qiime taxa barplot \
+  --i-table table-singleR-dada2.qza \
+  --i-taxonomy taxonomy-dada2-single.qza \
+  --m-metadata-file metadata_col_7.tsv \
+  --o-visualization taxa-bar-dada-single-plots.qzv
+
+  qiime composition add-pseudocount \
+  --i-table table-singleR-dada2.qza \ # assumes there are two groups for comparison, otherwise rectify according to manual
+  --o-composition-table comp-gut-singleR-dada2table.qza
+
+  qiime composition ancom \
+  --i-table table-singleR-dada2.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --m-metadata-column Diett \
+  --o-visualization ancom-Diett-dada2-single.qzv
+
