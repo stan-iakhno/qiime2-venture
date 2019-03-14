@@ -41,3 +41,10 @@ qiime feature-table tabulate-seqs \
   --o-tree unrooted-singleR-dada2-tree.qza \
   --o-rooted-tree rooted-tree-singleR-dada2.qza
   --p-n-threads 16
+  #core metrics
+  qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree-singleR-dada2.qza \
+  --i-table table-singleR-dada2.qza \
+  --p-sampling-depth 492527 \
+  --m-metadata-file metadata_col_7.tsv \
+  --output-dir core-metrics-results
