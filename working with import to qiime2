@@ -77,7 +77,7 @@ qiime metadata tabulate \
 
   qiime composition ancom \
   --i-table table-singleR-dada2.qza \
-  --m-metadata-file sample-metadata.tsv \
+  --m-metadata-file metadata_col_7.tsv \
   --m-metadata-column Diett \
   --o-visualization ancom-Diett-dada2-single.qzv
 
