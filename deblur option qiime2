@@ -1,0 +1,6 @@
+qiime vsearch join-pairs \
+  --i-demultiplexed-seqs manifest.qza \
+  --output-dir merged-vsearch
+  
+CUTADAPT
+cutadapt -u 5 -o trimmed.fastq reads.fastq
