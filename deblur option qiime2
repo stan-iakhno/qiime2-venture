@@ -1,6 +1,21 @@
 qiime vsearch join-pairs \
   --i-demultiplexed-seqs manifest.qza \
   --output-dir merged-vsearch
-  
-CUTADAPT
-cutadapt -u 5 -o trimmed.fastq reads.fastq
+
+qiime quality-filter q-score-joined \
+ --i-demux joined_sequences.qza \
+ --o-filtered-sequences demux-filtered-joined_sequences.qza \
+ --o-filter-stats demux-filter-stats-joined_sequences.qza
+
+qiime deblur denoise-16S \
+  --i-demultiplexed-seqs joined_sequences.qza \
+  --p-trim-length 0 \
+  --o-representative-sequences repres-demux-filtered-joined_sequences.qza \
+  --o-table table-deblur-vsearch-merged.qza \
+  --p-sample-stats \
+  --o-stats deblur-stats-merged.qza
+
+
+
+##CUTADAPT
+###cutadapt -u 5 -o trimmed.fastq reads.fastq
