@@ -1,0 +1,1 @@
+vsearch --fastx_subsample NG-15767_IL7_11_lib260500_5997_1_1_subsample200k.fastq.gz --randseed 22 --sample_size 1000 --fastqout test3.fastq.gz
