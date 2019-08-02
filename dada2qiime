@@ -1,0 +1,43 @@
+library(phyloseq)
+ps <- ps_f11_B_correct_ids_with_all_info
+# Export taxonomy table as "tax.txt"
+tax<-as(tax_table(ps),"matrix")
+tax_cols <- colnames(tax)
+tax<-as.data.frame(tax)
+tax$taxonomy<-do.call(paste, c(tax[tax_cols], sep=";"))
+for(co in tax_cols) tax[co]<-NULL
+write.table(tax, "tax.txt", quote=FALSE, col.names=FALSE, sep="\t")
+
+# Export feature/OTU table
+
+# As a biom file
+devtools::install_github("joey711/biomformat", force = T)
+library(biomformat);packageVersion("biomformat")
+## [1] ‘1.6.0’
+
+otu<-t(as(otu_table(ps,taxa_are_rows = FALSE),
+          "matrix")) # 't' to transform if taxa_are_rows=FALSE
+#if taxa_are_rows=TRUE
+#otu<-as(otu_table(GlobalPatterns),"matrix")
+otu_biom<-make_biom(data=otu)
+write_biom(otu_biom,"otu_biom.biom")
+
+# As a text file
+seqtab<-as(otu_table(ps),"matrix")
+write.table(t(seqtab), "seqtab.txt", sep="\t", row.names=TRUE, col.names=NA, quote=FALSE)
+#or from the phyloseq object, 't' to transform if taxa_are_rows=FALSE, no 't' if taxa_are_rows=TRUE
+#write.table(t(otu_table(ps), "seqtab.txt",sep="\t", row.names=TRUE, col.names=NA, quote=FALSE)
+
+# Export metadata (if you have a properly formatted metadata file that you imported in your phyloseq pipeline, you can skip this step and just use that text file directly in QIIME 2)
+write.table(sample_data(ps),"sample-metadata.txt", sep="\t", row.names=T, col.names=TRUE, quote=FALSE)
+
+#In qiime2 
+qiime tools import \
+  --input-path otu_biom.biom \
+  --type 'FeatureTable[Frequency]' \
+  --input-format BIOMV100Format \
+  --output-path feature-table.qza
+
+  qiime metadata tabulate \
+  --m-input-file sample-metadata.txt \
+  --o-visualization tabulated-sample-metadata.qzv
